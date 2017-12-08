@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Jadwal MBWG</title>
+  </head>
+  <body>
+    <a href="/schedForm">Add Schedule</a><br/>
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Tanggal</th>
+        <th>Kegiatan</th>
+        <th>Tempat</th>
+        <th>Keterangan</th>
+        <th>PIC</th>
+      </tr>
+      {{ if . }}
+        {{ range . }}
+        <tr>
+          <td>{{ .ID }}</td>
+          <td>{{ .Tanggal }}</td>
+          <td>{{ .Kegiatan }}</td>
+          <td>{{ .Tempat }}</td>
+          <td>{{ .Keterangan}}</td>
+          <td>}} .PIC}}</td>
+          <td>
+            <a href="/deleteSched?id={{.ID}}">Delete</a> |
+            <a href="/editSched?id={{.ID}}">Edit</a>
+          </td>
+        </tr>
+        {{ end }}
+      {{ end }}
+    </table>
+  </body>
+  </html>

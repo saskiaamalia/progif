@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Home</title>
+  </head>
+  <body>
+    {{ if . }}
+      <form method="post" action="/updateSched">
+        <input type="hidden" name="id" value={{ .ID }} />
+        Tanggal(yyyy-mm-dd): <input type="text" name="tanggal" value= {{ .Tanggal }} /> <br/>
+        Kegiatan: <input type="text" name="kegiatan" value= {{ .Kegiatan }} /> <br/>
+        Tempat:  <input type="text" name="tempat" value= {{ .Tempat }} /> <br/>
+        Keterangan:  <input type="text" name="keterangan" value= {{ .Keterangan }} /> <br/>
+        Person In Charge(PIC):  <input type="text" name="pic" value= {{ .PIC }} /> <br/>
+
+        <input type="submit" value="Update"/>
+      </form>
+    {{ else }}
+      <h1> Data Not Found </h1>
+    {{ end }}
+  </body>
+  </html>
