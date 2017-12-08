@@ -39,6 +39,8 @@ func init() {
 	tpl = template.Must(template.ParseGlob("templates/*"))
 }
 
+
+
 //create handler
 func main() {
     defer db.Close()
