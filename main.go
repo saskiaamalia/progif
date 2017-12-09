@@ -32,7 +32,7 @@ type sched struct {
 }
 
 func init() {
-	db, err = sql.Open("mysql", "root:pass@/schedule")
+	db, err = sql.Open("mysql", "root:pass@tcp(127.0.0.1:3307)/schedule")
 	checkErr(err)
 	err = db.Ping()
 	checkErr(err)
@@ -69,17 +69,17 @@ func index(w http.ResponseWriter, req *http.Request) {
         tempat,
         keterangan,
         pic
-          FROM scheds;`)
+          FROM schedule;`)
    checkErr(e)
 
-    scheds := make([]sched, 0)
+    schedule := make([]sched, 0)
     for rows.Next() {
       schd := sched{}
       rows.Scan(&schd.ID, &schd.Tanggal, &schd.Kegiatan, &schd.Tempat,  &schd.Keterangan, &schd.PIC)
-      scheds = append(scheds, schd)
+      schedule = append(schedule, schd)
     }
-    log.Println(scheds)
-    tpl.ExecuteTemplate(w, "index.gohtml", scheds)
+    log.Println(schedule)
+    tpl.ExecuteTemplate(w, "index.gohtml", schedule)
 }
 
 // sched form handle function
@@ -105,7 +105,7 @@ func createSched(w http.ResponseWriter, req *http.Request) {
         usr.Password = bPass
         _, e = db.Exec(*/
          _, err = db.Exec(
-         	"INSERT INTO scheds (tanggal, kegiatan, tempat, keterangan, pic) VALUES (?, ?, ?, ?, ?)",
+         	"INSERT INTO schedule (tanggal, kegiatan, tempat, keterangan, pic) VALUES (?, ?, ?, ?, ?)",
             schd.Tanggal,
             schd.Kegiatan,
             schd.Tempat,
@@ -133,7 +133,7 @@ func editSched(w http.ResponseWriter, req *http.Request) {
         	tempat,
         	keterangan,
         	pic
-          FROM scheds
+          FROM schedule
         WHERE id = ` + id + `;`)
     checkErr(err)
     schd := sched{}
@@ -146,7 +146,7 @@ func editSched(w http.ResponseWriter, req *http.Request) {
 // update sched handle function
 func updateSched(w http.ResponseWriter, req *http.Request) {
     _, er := db.Exec(
-        "UPDATE scheds SET tanggal = ?, kegiatan = ?, tempat = ?, keterangan = ?, pic = ? WHERE id = ? ",
+        "UPDATE schedule SET tanggal = ?, kegiatan = ?, tempat = ?, keterangan = ?, pic = ? WHERE id = ? ",
         req.FormValue("tanggal"),
         req.FormValue("kegiatan"),
         req.FormValue("tempat"),
@@ -165,7 +165,7 @@ func deleteSched(res http.ResponseWriter, req *http.Request) {
        http.Error(res, "Please write ID", http.StatusBadRequest)
            return
     }
-    _, er := db.Exec("DELETE FROM scheds WHERE id = ?", id)
+    _, er := db.Exec("DELETE FROM schedule WHERE id = ?", id)
     checkErr(er)
     http.Redirect(res, req, "/", http.StatusSeeOther)
 }
