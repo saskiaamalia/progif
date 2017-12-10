@@ -13,9 +13,9 @@ var db *sql.DB
 var err error
 var tpl *template.Template
  
-func init() {
+/*func init() {
  tpl = template.Must(template.ParseGlob("templates/*"))
-}
+}*/
  
 /*func main() {
  log.Fatalln(http.ListenAndServe(":8080", nil))
@@ -50,8 +50,8 @@ func main() {
     http.HandleFunc("/editSched", editSched)
     http.HandleFunc("/deleteSched", deleteSched)
     http.HandleFunc("/updateSched", updateSched)
-    log.Println("Server is up on 8080 port")
-    log.Fatalln(http.ListenAndServe(":8080", nil))
+    log.Println("Server is up on 9000 port")
+    log.Fatalln(http.ListenAndServe(":9000", nil))
 }
 
 func checkErr(err error) {
@@ -90,7 +90,7 @@ func schedForm(w http.ResponseWriter, req *http.Request) {
 
 //create sched handle function
 func createSched(w http.ResponseWriter, req *http.Request) {
-    if req.Method == http.MethodPost {
+   if req.Method == http.MethodPost {
         schd := sched{}
         schd.Tanggal = req.FormValue("tanggal")
         schd.Kegiatan = req.FormValue("kegiatan")
@@ -118,8 +118,9 @@ func createSched(w http.ResponseWriter, req *http.Request) {
                 }*/
         checkErr(err)
         http.Redirect(w, req, "/", http.StatusSeeOther)
+        //tpl.ExecuteTemplate(w, "editSched.gohtml", schd)
         return
-    }
+  	}
     http.Error(w, "Method Not Supported", http.StatusMethodNotAllowed)
 }
 
