@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 13, 2017 at 08:50 AM
+-- Generation Time: Dec 13, 2017 at 10:32 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -19,17 +19,17 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `jadwal`
+-- Database: `jadwal_mbwg`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `schedule`
+-- Table structure for table `schedule_mbwg`
 --
 
-CREATE TABLE `schedule` (
-  `ID` int(10) NOT NULL,
+CREATE TABLE `schedule_mbwg` (
+  `ID` int(11) NOT NULL,
   `Tanggal` date NOT NULL,
   `Kegiatan` varchar(100) NOT NULL,
   `Tempat` varchar(100) NOT NULL,
@@ -38,40 +38,10 @@ CREATE TABLE `schedule` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `schedule`
+-- Dumping data for table `schedule_mbwg`
 --
 
-INSERT INTO `schedule` (`ID`, `Tanggal`, `Kegiatan`, `Tempat`, `Keterangan`, `PIC`) VALUES
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
-(0, '0000-00-00', '', '', '', ''),
+INSERT INTO `schedule_mbwg` (`ID`, `Tanggal`, `Kegiatan`, `Tempat`, `Keterangan`, `PIC`) VALUES
 (1001, '2018-01-04', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria\r'),
 (1002, '2018-01-05', 'Syukuran Wisuda', 'Kantin Barak ITB', 'Acara internal dalam rangka merayakan wisudawan oktober', 'Ida\r'),
 (1003, '2018-01-05', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria\r'),
@@ -101,15 +71,17 @@ INSERT INTO `schedule` (`ID`, `Tanggal`, `Kegiatan`, `Tempat`, `Keterangan`, `PI
 (1027, '2018-02-01', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria\r'),
 (1028, '2018-02-02', 'Penampilan Perdana Calon Anggota Baru', 'Lapangan Basket ITB', 'Penampilan perdana calon anggota baru', 'Zhafira\r'),
 (1029, '2018-02-03', 'Pelantikan Anggota Baru', 'TBA', 'Proses pengangkatan calon anggota baru menjadi anggota biasa', 'Zen\r'),
-(1030, '2018-02-04', 'Pelantikan Anggota Baru', 'TBA', 'Proses pengangkatan calon anggota baru menjadi anggota biasa', 'Zen'),
-(0, '2017-12-08', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria'),
-(0, '2017-12-08', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria'),
-(0, '2017-12-08', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria'),
-(0, '2017-12-08', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria'),
-(0, '2017-12-09', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria'),
-(0, '2017-12-09', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria'),
-(0, '2017-12-09', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria'),
-(0, '2017-12-10', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria');
+(1030, '2018-02-04', 'Pelantikan Anggota Baru', 'TBA', 'Proses pengangkatan calon anggota baru menjadi anggota biasa', 'Zen');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `schedule_mbwg`
+--
+ALTER TABLE `schedule_mbwg`
+  ADD UNIQUE KEY `ID` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
