@@ -82,41 +82,30 @@ func schedForm(w http.ResponseWriter, req *http.Request) {
 
 //create sched handle function
 func createSched(w http.ResponseWriter, req *http.Request) {
-   if req.Method == http.MethodPost {
+   //if req.Method == http.MethodPost {
         schd := sched{}
-       // newID := ID + 1;
-        //schd.ID = req.FormValue("ID")
+
         schd.Tanggal = req.FormValue("Tanggal")
         schd.Kegiatan = req.FormValue("Kegiatan")
         schd.Tempat = req.FormValue("Tempat")
         schd.Keterangan = req.FormValue("Keterangan")
         schd.PIC = req.FormValue("PIC")
-       /* bPass, e := bcrypt.GenerateFromPassword([]byte(req.FormValue("password")), bcrypt.MinCost)
-        if e != nil {
-                   http.Error(w, e.Error(), http.StatusInternalServerError)
-                   return
-                }
-        usr.Password = bPass
-        _, e = db.Exec(*/
+      
          _, err = db.Exec(
-         	"INSERT INTO schedule_mbwg (ID, Tanggal, Kegiatan, Tempat, Keterangan, PIC) VALUES (?, ?, ?, ?, ?, ?)",
-            schd.ID,
+         	"INSERT INTO schedule_mbwg (ID, Tanggal, Kegiatan, Tempat, Keterangan, PIC) VALUES (ID, ?, ?, ?, ?, ?)",
             schd.Tanggal,
             schd.Kegiatan,
             schd.Tempat,
             schd.Keterangan,
             schd.PIC,
        	)
-       /* if e != nil {
-                   http.Error(w, e.Error(), http.StatusInternalServerError)
-                   return
-                }*/
+    
         checkErr(err)
         http.Redirect(w, req, "/", http.StatusSeeOther)
         tpl.ExecuteTemplate(w, "editSched.gohtml", schd)
         return
-  	}
-    http.Error(w, "Method Not Supported", http.StatusMethodNotAllowed)
+  	//}
+  //  http.Error(w, "Method Not Supported", http.StatusMethodNotAllowed)
 }
 
 // edit sched handle function
@@ -160,8 +149,9 @@ func deleteSched(w http.ResponseWriter, req *http.Request) {
     if ID == "" {
        http.Error(w, "Please write ID", http.StatusBadRequest)
            return
-    }
+    } else {
     _, er := db.Exec("DELETE FROM schedule_mbwg WHERE ID = ?", ID)
     checkErr(er)
     http.Redirect(w, req, "/", http.StatusSeeOther)
+  }
 }
