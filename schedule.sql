@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 08, 2017 at 03:40 PM
+-- Generation Time: Dec 13, 2017 at 08:50 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -30,10 +30,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `schedule` (
   `ID` int(10) NOT NULL,
-  `TANGGAL` date NOT NULL,
-  `KEGIATAN` varchar(100) NOT NULL,
-  `TEMPAT` varchar(100) NOT NULL,
-  `KETERANGAN` varchar(100) NOT NULL,
+  `Tanggal` date NOT NULL,
+  `Kegiatan` varchar(100) NOT NULL,
+  `Tempat` varchar(100) NOT NULL,
+  `Keterangan` varchar(100) NOT NULL,
   `PIC` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -41,7 +41,37 @@ CREATE TABLE `schedule` (
 -- Dumping data for table `schedule`
 --
 
-INSERT INTO `schedule` (`ID`, `TANGGAL`, `KEGIATAN`, `TEMPAT`, `KETERANGAN`, `PIC`) VALUES
+INSERT INTO `schedule` (`ID`, `Tanggal`, `Kegiatan`, `Tempat`, `Keterangan`, `PIC`) VALUES
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
+(0, '0000-00-00', '', '', '', ''),
 (1001, '2018-01-04', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria\r'),
 (1002, '2018-01-05', 'Syukuran Wisuda', 'Kantin Barak ITB', 'Acara internal dalam rangka merayakan wisudawan oktober', 'Ida\r'),
 (1003, '2018-01-05', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria\r'),
@@ -71,7 +101,15 @@ INSERT INTO `schedule` (`ID`, `TANGGAL`, `KEGIATAN`, `TEMPAT`, `KETERANGAN`, `PI
 (1027, '2018-02-01', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria\r'),
 (1028, '2018-02-02', 'Penampilan Perdana Calon Anggota Baru', 'Lapangan Basket ITB', 'Penampilan perdana calon anggota baru', 'Zhafira\r'),
 (1029, '2018-02-03', 'Pelantikan Anggota Baru', 'TBA', 'Proses pengangkatan calon anggota baru menjadi anggota biasa', 'Zen\r'),
-(1030, '2018-02-04', 'Pelantikan Anggota Baru', 'TBA', 'Proses pengangkatan calon anggota baru menjadi anggota biasa', 'Zen');
+(1030, '2018-02-04', 'Pelantikan Anggota Baru', 'TBA', 'Proses pengangkatan calon anggota baru menjadi anggota biasa', 'Zen'),
+(0, '2017-12-08', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria'),
+(0, '2017-12-08', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria'),
+(0, '2017-12-08', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria'),
+(0, '2017-12-08', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria'),
+(0, '2017-12-09', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria'),
+(0, '2017-12-09', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria'),
+(0, '2017-12-09', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria'),
+(0, '2017-12-10', 'Latihan Intensif', 'Lapangan Basket ITB', 'Latihan yang dilakukan untuk calon anggota baru', 'Satria');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

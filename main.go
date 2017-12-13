@@ -23,7 +23,7 @@ var tpl *template.Template
 
 //create user struct
 type sched struct {
-    ACTIVITY_ID        	int64
+    ID        	int64
     Tanggal  	string
     Kegiatan 	string
     Tempat  	string
@@ -50,8 +50,8 @@ func main() {
     http.HandleFunc("/editSched", editSched)
     http.HandleFunc("/deleteSched", deleteSched)
     http.HandleFunc("/updateSched", updateSched)
-    log.Println("Server is up on 9000 port")
-    log.Fatalln(http.ListenAndServe(":9000", nil))
+    log.Println("Server is up on 8180 port")
+    log.Fatalln(http.ListenAndServe(":8180", nil))
 }
 
 func checkErr(err error) {
@@ -63,19 +63,19 @@ func checkErr(err error) {
 //handler function
 func index(w http.ResponseWriter, req *http.Request) {
   rows, e := db.Query(
-       `SELECT ACTIVITY_ID,
-        tanggal,
-        kegiatan,
-        tempat,
-        keterangan,
-        pic
+       `SELECT ID,
+        Tanggal,
+        Kegiatan,
+        Tempat,
+        Keterangan,
+        PIC
           FROM schedule;`)
    checkErr(e)
 
     schedule := make([]sched, 0)
     for rows.Next() {
       schd := sched{}
-      rows.Scan(&schd.ACTIVITY_ID, &schd.Tanggal, &schd.Kegiatan, &schd.Tempat,  &schd.Keterangan, &schd.PIC)
+      rows.Scan(&schd.ID, &schd.Tanggal, &schd.Kegiatan, &schd.Tempat,  &schd.Keterangan, &schd.PIC)
       schedule = append(schedule, schd)
     }
     log.Println(schedule)
@@ -92,11 +92,11 @@ func schedForm(w http.ResponseWriter, req *http.Request) {
 func createSched(w http.ResponseWriter, req *http.Request) {
    if req.Method == http.MethodPost {
         schd := sched{}
-        schd.Tanggal = req.FormValue("tanggal")
-        schd.Kegiatan = req.FormValue("kegiatan")
-        schd.Tempat = req.FormValue("tempat")
-        schd.Keterangan = req.FormValue("keterangan")
-        schd.PIC = req.FormValue("pic")
+        schd.Tanggal = req.FormValue("Tanggal")
+        schd.Kegiatan = req.FormValue("Kegiatan")
+        schd.Tempat = req.FormValue("Tempat")
+        schd.Keterangan = req.FormValue("Keterangan")
+        schd.PIC = req.FormValue("PIC")
        /* bPass, e := bcrypt.GenerateFromPassword([]byte(req.FormValue("password")), bcrypt.MinCost)
         if e != nil {
                    http.Error(w, e.Error(), http.StatusInternalServerError)
@@ -105,7 +105,7 @@ func createSched(w http.ResponseWriter, req *http.Request) {
         usr.Password = bPass
         _, e = db.Exec(*/
          _, err = db.Exec(
-         	"INSERT INTO schedule (tanggal, kegiatan, tempat, keterangan, pic) VALUES (?, ?, ?, ?, ?)",
+         	"INSERT INTO schedule (Tanggal, Kegiatan, Tempat, Keterangan, PIC) VALUES (?, ?, ?, ?, ?)",
             schd.Tanggal,
             schd.Kegiatan,
             schd.Tempat,
@@ -118,7 +118,7 @@ func createSched(w http.ResponseWriter, req *http.Request) {
                 }*/
         checkErr(err)
         http.Redirect(w, req, "/", http.StatusSeeOther)
-        //tpl.ExecuteTemplate(w, "editSched.gohtml", schd)
+        tpl.ExecuteTemplate(w, "editSched.gohtml", schd)
         return
   	}
     http.Error(w, "Method Not Supported", http.StatusMethodNotAllowed)
@@ -126,20 +126,20 @@ func createSched(w http.ResponseWriter, req *http.Request) {
 
 // edit sched handle function
 func editSched(w http.ResponseWriter, req *http.Request) {
-    ACTIVITY_ID := req.FormValue("ACTIVITY_ID")
+    ID := req.FormValue("ID")
     rows, err := db.Query(
-        `SELECT ACTIVITY_ID,
-        	tanggal,
-       		kegiatan,
-        	tempat,
-        	keterangan,
-        	pic
+        `SELECT ID,
+        	Tanggal,
+       		Kegiatan,
+        	Tempat,
+        	Keterangan,
+        	PIC
           FROM schedule
-        WHERE ACTIVITY_ID = ` + ACTIVITY_ID + `;`)
+        WHERE ID = ` + ID + `;`)
     checkErr(err)
     schd := sched{}
     for rows.Next() {
-        rows.Scan(&schd.ACTIVITY_ID, &schd.Tanggal, &schd.Kegiatan, &schd.Tempat,  &schd.Keterangan, &schd.PIC)
+        rows.Scan(&schd.ID, &schd.Tanggal, &schd.Kegiatan, &schd.Tempat,  &schd.Keterangan, &schd.PIC)
     }
     tpl.ExecuteTemplate(w, "editSched.gohtml", schd)
 }
@@ -147,13 +147,13 @@ func editSched(w http.ResponseWriter, req *http.Request) {
 // update sched handle function
 func updateSched(w http.ResponseWriter, req *http.Request) {
     _, er := db.Exec(
-        "UPDATE schedule SET tanggal = ?, kegiatan = ?, tempat = ?, keterangan = ?, pic = ? WHERE ACTIVITY_ID = ? ",
-        req.FormValue("tanggal"),
-        req.FormValue("kegiatan"),
-        req.FormValue("tempat"),
-        req.FormValue("keterangan"),
-        req.FormValue("pic"),
-        req.FormValue("ACTIVITY_ID"),
+        "UPDATE schedule SET Tanggal = ?, Kegiatan = ?, Tempat = ?, Keterangan = ?, PIC = ? WHERE ID = ? ",
+        req.FormValue("Tanggal"),
+        req.FormValue("Kegiatan"),
+        req.FormValue("Tempat"),
+        req.FormValue("Keterangan"),
+        req.FormValue("PIC"),
+        req.FormValue("ID"),
     )
     checkErr(er)
     http.Redirect(w, req, "/", http.StatusSeeOther)
@@ -161,12 +161,12 @@ func updateSched(w http.ResponseWriter, req *http.Request) {
 
 // delete sched handler function
 func deleteSched(res http.ResponseWriter, req *http.Request) {
-    ACTIVITY_ID := req.FormValue("ACTIVITY_ID")
-    if ACTIVITY_ID == "" {
-       http.Error(res, "Please write ACTIVITY_ID", http.StatusBadRequest)
+    ID := req.FormValue("ID")
+    if ID == "" {
+       http.Error(res, "Please write ID", http.StatusBadRequest)
            return
     }
-    _, er := db.Exec("DELETE FROM schedule WHERE ACTIVITY_ID = ?", ACTIVITY_ID)
+    _, er := db.Exec("DELETE FROM schedule WHERE ID = ?", ID)
     checkErr(er)
     http.Redirect(res, req, "/", http.StatusSeeOther)
 }
