@@ -82,7 +82,7 @@ func schedForm(w http.ResponseWriter, req *http.Request) {
 
 //create sched handle function
 func createSched(w http.ResponseWriter, req *http.Request) {
-   //if req.Method == http.MethodPost {
+   if req.Method == http.MethodPost {
         schd := sched{}
 
         schd.Tanggal = req.FormValue("Tanggal")
@@ -104,8 +104,8 @@ func createSched(w http.ResponseWriter, req *http.Request) {
         http.Redirect(w, req, "/", http.StatusSeeOther)
         tpl.ExecuteTemplate(w, "editSched.gohtml", schd)
         return
-  	//}
-  //  http.Error(w, "Method Not Supported", http.StatusMethodNotAllowed)
+  	}
+  http.Error(w, "Method Not Supported", http.StatusMethodNotAllowed)
 }
 
 // edit sched handle function
@@ -146,12 +146,12 @@ func updateSched(w http.ResponseWriter, req *http.Request) {
 // delete sched handler function
 func deleteSched(w http.ResponseWriter, req *http.Request) {
     ID := req.FormValue("ID")
-    if ID == "" {
+   /* if ID == "" {
        http.Error(w, "Please write ID", http.StatusBadRequest)
            return
-    } else {
+    } else {*/
     _, er := db.Exec("DELETE FROM schedule_mbwg WHERE ID = ?", ID)
     checkErr(er)
     http.Redirect(w, req, "/", http.StatusSeeOther)
-  }
+ // }
 }
