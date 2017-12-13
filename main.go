@@ -77,6 +77,7 @@ func index(w http.ResponseWriter, req *http.Request) {
 // sched form handle function
 func schedForm(w http.ResponseWriter, req *http.Request) {
   err = tpl.ExecuteTemplate(w, "schedForm.gohtml", nil)
+//  createSched(w, req)
   checkErr(err)
 }
 
@@ -102,7 +103,7 @@ func createSched(w http.ResponseWriter, req *http.Request) {
     
         checkErr(err)
         http.Redirect(w, req, "/", http.StatusSeeOther)
-        tpl.ExecuteTemplate(w, "editSched.gohtml", schd)
+       // tpl.ExecuteTemplate(w, "editSched.gohtml", schd)
         return
   	}
   http.Error(w, "Method Not Supported", http.StatusMethodNotAllowed)
@@ -152,6 +153,7 @@ func deleteSched(w http.ResponseWriter, req *http.Request) {
     } else {*/
     _, er := db.Exec("DELETE FROM schedule_mbwg WHERE ID = ?", ID)
     checkErr(er)
+
     http.Redirect(w, req, "/", http.StatusSeeOther)
  // }
 }
