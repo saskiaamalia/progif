@@ -2,17 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Jadwal MBWG</title>
+    <title>Edit Schedule</title>
   </head>
   <body>
+    <h1>Edit Jadwal</h1>
     {{ if . }}
       <form method="post" action="/updateSched">
-        <input type="hidden" name="ID" value= {{ .Tanggal }}/>
-        Tanggal(yyyy-mm-dd): <input type="text" name="Tanggal" value= {{ .Tanggal }}/> <br/>
-        Kegiatan: <input type="text" name="Kegiatan" value= {{ .Tanggal }}/> <br/>
-        Tempat:  <input type="text" name="Tempat" value= {{ .Tanggal }}/> <br/>
-        Keterangan:  <input type="text" name="Keterangan" value= {{ .Tanggal }}/> <br/>
-        Person In Charge(PIC):  <input type="text" name="PIC" value= {{ .Tanggal }}/> <br/>
+        <input type="hidden" name="ID" value= {{ .ID }}/>
+        Tanggal(yyyy-mm-dd): <input type="text" name="Tanggal" value= {{ .Tanggal }}> <br/>
+        Kegiatan: <input type="text" name="Kegiatan" value= {{ .Kegiatan }}> <br/>
+        Tempat:  <input type="text" name="Tempat" value= {{ .Tempat }}> <br/>
+        Keterangan:  <input type="text" name="Keterangan" value= {{ .Keterangan }}> <br/>
+        Person In Charge(PIC):  <input type="text" name="PIC" value= {{ .PIC }}> <br/>
 
         <input type="submit" value="Update"/>
       </form>

@@ -109,7 +109,7 @@ func createSched(w http.ResponseWriter, req *http.Request) {
        	)
     
         checkErr(err)
-        http.Redirect(w, req, "/", http.StatusSeeOther)
+        http.Redirect(w, req, "/viewSched", http.StatusSeeOther)
         return
   	}
   http.Error(w, "Method Not Supported", http.StatusMethodNotAllowed)
@@ -138,7 +138,7 @@ func editSched(w http.ResponseWriter, req *http.Request) {
 // Fungsi untuk memperbarui jadwal yang sudah ada
 func updateSched(w http.ResponseWriter, req *http.Request) {
     _, er := db.Exec(
-        "UPDATE schedule_mbwg SET Tanggal = ?, Kegiatan = ?, Tempat = ?, Keterangan = ?, PIC = ? WHERE ID = ?;",
+        "UPDATE schedule_mbwg SET Tanggal = ?, Kegiatan = ?, Tempat = ?, Keterangan = ?, PIC = ? WHERE ID = ?",
         req.FormValue("Tanggal"),
         req.FormValue("Kegiatan"),
         req.FormValue("Tempat"),
@@ -147,7 +147,7 @@ func updateSched(w http.ResponseWriter, req *http.Request) {
         req.FormValue("ID"),
     )
     checkErr(er)
-    http.Redirect(w, req, "/", http.StatusSeeOther)
+    http.Redirect(w, req, "/viewSched", http.StatusSeeOther)
 }
 
 // Fungsi untuk menghapus jadwal
@@ -162,6 +162,6 @@ func deleteSched(w http.ResponseWriter, req *http.Request) {
     //_, er := rows.Exec(ID)
     //checkErr(er)
 
-    http.Redirect(w, req, "/", http.StatusSeeOther)
+    http.Redirect(w, req, "/viewSched", http.StatusSeeOther)
  // }
 }

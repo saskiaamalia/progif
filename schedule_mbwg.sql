@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 13, 2017 at 10:32 AM
+-- Generation Time: Dec 14, 2017 at 10:48 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -81,7 +81,17 @@ INSERT INTO `schedule_mbwg` (`ID`, `Tanggal`, `Kegiatan`, `Tempat`, `Keterangan`
 -- Indexes for table `schedule_mbwg`
 --
 ALTER TABLE `schedule_mbwg`
-  ADD UNIQUE KEY `ID` (`ID`);
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `schedule_mbwg`
+--
+ALTER TABLE `schedule_mbwg`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1031;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
