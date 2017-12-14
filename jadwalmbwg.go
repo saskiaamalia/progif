@@ -153,14 +153,9 @@ func updateSched(w http.ResponseWriter, req *http.Request) {
 // Fungsi untuk menghapus jadwal
 func deleteSched(w http.ResponseWriter, req *http.Request) {
     ID := req.FormValue("ID")
-   /* if ID == "" {
-       http.Error(w, "Please write ID", http.StatusBadRequest)
-           return
-    } else {*/
+ 
     _, er := db.Exec("DELETE FROM schedule_mbwg WHERE ID = ?;", ID)
     checkErr(er)
-    //_, er := rows.Exec(ID)
-    //checkErr(er)
 
     http.Redirect(w, req, "/viewSched", http.StatusSeeOther)
  // }
