@@ -25,7 +25,7 @@ type sched struct {
 
 func init() {
   // Membuka database jadwal_mbwg
-	db, err = sql.Open("mysql", "root:pass@tcp(127.0.0.1:3307)/jadwal_mbwg")
+	db, err = sql.Open("mysql", "root:@tcp(167.205.67.251:3306)/jadwal_mbwg")
 	checkErr(err)
 	err = db.Ping()
 	checkErr(err)
@@ -44,8 +44,8 @@ func main() {
     http.HandleFunc("/editSched", editSched)
     http.HandleFunc("/deleteSched", deleteSched)
     http.HandleFunc("/updateSched", updateSched)
-    log.Println("Server is up on 9191 port")
-    log.Fatalln(http.ListenAndServe(":9191", nil))
+    log.Println("Server is up on 9091 port")
+    log.Fatalln(http.ListenAndServe(":9091", nil))
 }
 
 // Fungsi cek error
