@@ -36,7 +36,8 @@ func init() {
 //create handler
 func main() {
     defer db.Close()
-    http.HandleFunc("/", index)
+    http.HandleFunc("/", home)
+    http.HandleFunc("/viewSched", index)
     http.HandleFunc("/schedForm", schedForm)
     http.HandleFunc("/createSched", createSched)
     http.HandleFunc("/editSched", editSched)
@@ -50,6 +51,10 @@ func checkErr(err error) {
 	if err != nil {
 		log.Fatalln(err)
 	}
+}
+
+func home(w http.ResponseWriter, req *http.Request) {
+  tpl.ExecuteTemplate(w, "home.gohtml", nil)
 }
 
 //handler function
