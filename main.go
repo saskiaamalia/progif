@@ -13,7 +13,7 @@ var db *sql.DB
 var err error
 var tpl *template.Template
 
-//create user struct
+//Tipe struct untuk schedule
 type sched struct {
     ID        	int64
     Tanggal  	string
@@ -24,6 +24,7 @@ type sched struct {
 }
 
 func init() {
+  // Membuka database jadwal_mbwg
 	db, err = sql.Open("mysql", "root:pass@tcp(127.0.0.1:3307)/jadwal_mbwg")
 	checkErr(err)
 	err = db.Ping()
@@ -33,7 +34,7 @@ func init() {
 
 
 
-//create handler
+//Fungsi utama
 func main() {
     defer db.Close()
     http.HandleFunc("/", home)
@@ -47,17 +48,19 @@ func main() {
     log.Fatalln(http.ListenAndServe(":9191", nil))
 }
 
+// Fungsi cek error
 func checkErr(err error) {
 	if err != nil {
 		log.Fatalln(err)
 	}
 }
 
+// Fungsi untuk menunjukkan tampilan home
 func home(w http.ResponseWriter, req *http.Request) {
   tpl.ExecuteTemplate(w, "home.gohtml", nil)
 }
 
-//handler function
+//Fungsi untuk menunjukan tampilan data jadwal
 func index(w http.ResponseWriter, req *http.Request) {
   rows, e := db.Query(
        `SELECT ID,
@@ -79,13 +82,13 @@ func index(w http.ResponseWriter, req *http.Request) {
     tpl.ExecuteTemplate(w, "index.gohtml", schedule_mbwg)
 }
 
-// sched form handle function
+// Fungsi untuk menampilkan form pengisian jadwal
 func schedForm(w http.ResponseWriter, req *http.Request) {
   err = tpl.ExecuteTemplate(w, "schedForm.gohtml", nil)
   checkErr(err)
 }
 
-//create sched handle function
+// Fungsi untuk membuat jadwal baru
 func createSched(w http.ResponseWriter, req *http.Request) {
    if req.Method == http.MethodPost {
         schd := sched{}
@@ -107,13 +110,12 @@ func createSched(w http.ResponseWriter, req *http.Request) {
     
         checkErr(err)
         http.Redirect(w, req, "/", http.StatusSeeOther)
-       // tpl.ExecuteTemplate(w, "editSched.gohtml", schd)
         return
   	}
   http.Error(w, "Method Not Supported", http.StatusMethodNotAllowed)
 }
 
-// edit sched handle function
+// Fungsi untuk mengubah jadwal yang sudah ada
 func editSched(w http.ResponseWriter, req *http.Request) {
     ID := req.FormValue("ID")
     rows, err := db.Query(
@@ -133,7 +135,7 @@ func editSched(w http.ResponseWriter, req *http.Request) {
     tpl.ExecuteTemplate(w, "editSched.gohtml", schd)
 }
 
-// update sched handle function
+// Fungsi untuk memperbarui jadwal yang sudah ada
 func updateSched(w http.ResponseWriter, req *http.Request) {
     _, er := db.Exec(
         "UPDATE schedule_mbwg SET Tanggal = ?, Kegiatan = ?, Tempat = ?, Keterangan = ?, PIC = ? WHERE ID = ?;",
@@ -148,7 +150,7 @@ func updateSched(w http.ResponseWriter, req *http.Request) {
     http.Redirect(w, req, "/", http.StatusSeeOther)
 }
 
-// delete sched handler function
+// Fungsi untuk menghapus jadwal
 func deleteSched(w http.ResponseWriter, req *http.Request) {
     ID := req.FormValue("ID")
    /* if ID == "" {
