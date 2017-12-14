@@ -77,7 +77,6 @@ func index(w http.ResponseWriter, req *http.Request) {
 // sched form handle function
 func schedForm(w http.ResponseWriter, req *http.Request) {
   err = tpl.ExecuteTemplate(w, "schedForm.gohtml", nil)
-//  createSched(w, req)
   checkErr(err)
 }
 
@@ -93,7 +92,7 @@ func createSched(w http.ResponseWriter, req *http.Request) {
         schd.PIC = req.FormValue("PIC")
       
          _, err = db.Exec(
-         	"INSERT INTO schedule_mbwg (ID, Tanggal, Kegiatan, Tempat, Keterangan, PIC) VALUES (ID, ?, ?, ?, ?, ?)",
+         	"INSERT INTO schedule_mbwg (ID, Tanggal, Kegiatan, Tempat, Keterangan, PIC) VALUES (ID, ?, ?, ?, ?, ?);",
             schd.Tanggal,
             schd.Kegiatan,
             schd.Tempat,
@@ -132,7 +131,7 @@ func editSched(w http.ResponseWriter, req *http.Request) {
 // update sched handle function
 func updateSched(w http.ResponseWriter, req *http.Request) {
     _, er := db.Exec(
-        "UPDATE schedule_mbwg SET Tanggal = ?, Kegiatan = ?, Tempat = ?, Keterangan = ?, PIC = ? WHERE ID = ? ",
+        "UPDATE schedule_mbwg SET Tanggal = ?, Kegiatan = ?, Tempat = ?, Keterangan = ?, PIC = ? WHERE ID = ?;",
         req.FormValue("Tanggal"),
         req.FormValue("Kegiatan"),
         req.FormValue("Tempat"),
@@ -151,8 +150,10 @@ func deleteSched(w http.ResponseWriter, req *http.Request) {
        http.Error(w, "Please write ID", http.StatusBadRequest)
            return
     } else {*/
-    _, er := db.Exec("DELETE FROM schedule_mbwg WHERE ID = ?", ID)
+    _, er := db.Exec("DELETE FROM schedule_mbwg WHERE ID = ?;", ID)
     checkErr(er)
+    //_, er := rows.Exec(ID)
+    //checkErr(er)
 
     http.Redirect(w, req, "/", http.StatusSeeOther)
  // }
